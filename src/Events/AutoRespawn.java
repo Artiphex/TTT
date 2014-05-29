@@ -2,13 +2,13 @@ package Events;
 
 import java.lang.reflect.Field;
 
-import net.minecraft.server.v1_7_R3.EntityPlayer;
-import net.minecraft.server.v1_7_R3.EnumClientCommand;
-import net.minecraft.server.v1_7_R3.PacketPlayInClientCommand;
+import net.minecraft.server.v1_7_R1.EntityPlayer;
+import net.minecraft.server.v1_7_R1.EnumClientCommand;
+import net.minecraft.server.v1_7_R1.PacketPlayInClientCommand;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_7_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_7_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
