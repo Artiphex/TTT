@@ -18,11 +18,12 @@ public class DeathEvent implements Listener {
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent e) {
 		e.setDroppedExp(0);
+		e.getDrops().clear();
 
 		Player p = e.getEntity().getPlayer();
 		Player k = e.getEntity().getKiller();
 		
-		//AutoRespawn.autoRespawn(p);
+		AutoRespawn.autoRespawn(p);
 		
 		e.setDeathMessage("§8[§3TIMV§8] §7" + p.getName() + "§7 died!");
 		if (TTT.Innocent.contains(p.getName())) {
@@ -36,7 +37,6 @@ public class DeathEvent implements Listener {
 
 		p.teleport(new Location(Bukkit.getWorld("world"), 0.5, 58.5, 0.5));
 		
-		//PUNKTE
 				if (TTT.Innocent.contains(k.getName())) {
 				if (TTT.Innocent.contains(p.getName())) {
 			    k.sendMessage("§8[§3TIMV§8] §7You've killed an Innocent.");

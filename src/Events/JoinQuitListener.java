@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import de.iron42.TTT.GameStatus;
+import de.iron42.TTT.TTT;
 
 
 
@@ -23,7 +24,7 @@ public class JoinQuitListener implements Listener {
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
-		Player p= e.getPlayer();
+		Player p = e.getPlayer();
 		p.teleport(lobby);
 		p.getInventory().clear();
 		p.getInventory().setChestplate(null);
@@ -38,7 +39,9 @@ public class JoinQuitListener implements Listener {
 		Player p = e.getPlayer();
 		e.setQuitMessage("§8[§4TTT§8] " +p.getName()+" §7left the game. §8>§a" + (Bukkit.getOnlinePlayers().length - 1) + "/24§8<" );
 		Spieler.remove(p);
-		//Gewinnabfrage
+		if((TTT.Status == GameStatus.Game) || (TTT.Status == GameStatus.Deathmatch)) {
+		WinListener.onWin();	
+		}
 	}
 	
 	@EventHandler

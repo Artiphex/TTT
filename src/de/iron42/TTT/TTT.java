@@ -15,6 +15,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import Teams.Tags;
 import Events.AutoRespawn;
 import Events.BuildBreakListener;
 import Events.DeathEvent;
@@ -50,6 +52,7 @@ public class TTT extends JavaPlugin {
 		pm.registerEvents(new WinListener(), this);
 		pm.registerEvents(new DeathEvent(), this);
 		pm.registerEvents(new AutoRespawn(), this);
+		pm.registerEvents(new Tags(), this);
 		
 		this.getCommand("start").setExecutor(new Commands.StartCommand());
 		
@@ -213,9 +216,21 @@ public class TTT extends JavaPlugin {
 		  for (Player p : JoinQuitListener.Spieler) {
 		   if (Innocent.contains(p.getName())) {
 		    p.sendMessage("§8[§4TTT§8] §7You are §2Innocent");
+		    ItemStack de = new ItemStack(
+		    Material.LEATHER_CHESTPLATE, 1);
+		    LeatherArmorMeta d = (LeatherArmorMeta) de.getItemMeta();
+			d.setColor(Color.WHITE);
+			de.setItemMeta(d);
+			p.getInventory().setChestplate(de);
 		   }
 		   if (Traitor.contains(p.getName())) {
 		    p.sendMessage("§8[§4TTT§8] §7You are §4Traitor");
+		    ItemStack de = new ItemStack(
+		    Material.LEATHER_CHESTPLATE, 1);
+		    LeatherArmorMeta d = (LeatherArmorMeta) de.getItemMeta();
+			d.setColor(Color.WHITE);
+			de.setItemMeta(d);
+			p.getInventory().setChestplate(de);
 		   }
 		   if (Detective.contains(p.getName())) {
 		    p.sendMessage("§8[§4TTT§8] §7You are §1Detective");
