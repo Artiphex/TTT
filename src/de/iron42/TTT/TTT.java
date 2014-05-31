@@ -16,7 +16,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import Teams.Tags;
+import Teams.PacketSend;
 import Events.AutoRespawn;
 import Events.BuildBreakListener;
 import Events.DeathEvent;
@@ -52,7 +52,7 @@ public class TTT extends JavaPlugin {
 		pm.registerEvents(new WinListener(), this);
 		pm.registerEvents(new DeathEvent(), this);
 		pm.registerEvents(new AutoRespawn(), this);
-		pm.registerEvents(new Tags(), this);
+		//pm.registerEvents(new Tags(), this);
 		
 		this.getCommand("start").setExecutor(new Commands.StartCommand());
 		
@@ -102,6 +102,9 @@ public class TTT extends JavaPlugin {
 						Bukkit.broadcastMessage("§8[§4TTT§8] §aThe game starts now!");
 						
 						assignment();
+						//TEST
+						PacketSend.SendPacket();
+						//TEST
 						
 						Status = GameStatus.Game;
 						Timer = 1801;
