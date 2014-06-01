@@ -55,6 +55,7 @@ public class TTT extends JavaPlugin {
 		//pm.registerEvents(new Tags(), this);
 		
 		this.getCommand("start").setExecutor(new Commands.StartCommand());
+		this.getCommand("update").setExecutor(new Commands.SkullTest());
 		
 		Timer = 91;
 		Status = GameStatus.Lobby;

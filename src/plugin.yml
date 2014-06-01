@@ -8,3 +8,6 @@ commands:
   start:
     description: start
     usage: /start
+  update:
+    description: updates skull
+    usage: /update
