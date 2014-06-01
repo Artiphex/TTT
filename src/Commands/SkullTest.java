@@ -17,11 +17,11 @@ public class SkullTest implements CommandExecutor {
 
 					LootBlocks.Blocktest();
 
-					Bukkit.broadcastMessage("§8[§4TTT§8] §7All Skins are §bUpdated!");
+					Bukkit.broadcastMessage("§8[§4TTT§8] §7All Skins are §bupdated!");
 				}
 			
 		}
-		return false;
+		return true;
 	}
 
 }
