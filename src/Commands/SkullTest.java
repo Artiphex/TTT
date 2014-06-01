@@ -13,7 +13,7 @@ public class SkullTest implements CommandExecutor {
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("update")) {
 			
-			LootBlocks.OwnerTest();
+			
 			
 		}
 		return true;

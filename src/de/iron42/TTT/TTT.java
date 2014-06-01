@@ -23,6 +23,7 @@ import Events.DeathEvent;
 import Events.JoinQuitListener;
 import Events.LobbyListener;
 import Events.TraitorTest;
+import Events.WeaponHeads;
 import Events.WinListener;
 
 
@@ -52,7 +53,8 @@ public class TTT extends JavaPlugin {
 		pm.registerEvents(new WinListener(), this);
 		pm.registerEvents(new DeathEvent(), this);
 		pm.registerEvents(new AutoRespawn(), this);
-		//pm.registerEvents(new Tags(), this);
+		pm.registerEvents(new WeaponHeads(), this);
+		
 		
 		this.getCommand("start").setExecutor(new Commands.StartCommand());
 		this.getCommand("update").setExecutor(new Commands.SkullTest());
