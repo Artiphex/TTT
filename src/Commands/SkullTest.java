@@ -13,12 +13,7 @@ public class SkullTest implements CommandExecutor {
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("update")) {
 			
-				if (cs.isOp()) {
-
-					LootBlocks.Blocktest();
-
-					Bukkit.broadcastMessage("§8[§4TTT§8] §7All Skins are §bupdated!");
-				}
+			LootBlocks.OwnerTest();
 			
 		}
 		return true;
