@@ -4,6 +4,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
+
 import de.iron42.TTT.GameStatus;
 
 public class LobbyListener implements Listener {
@@ -20,5 +22,10 @@ public class LobbyListener implements Listener {
 		}
 		
 	}
-
+	
+	@EventHandler
+	public void Drop(PlayerDropItemEvent e) {
+		e.setCancelled(true);
+		
+	}
 }

@@ -20,10 +20,11 @@ import Teams.PacketSend;
 import Events.AutoRespawn;
 import Events.BuildBreakListener;
 import Events.DeathEvent;
+import Events.InteractListener;
 import Events.JoinQuitListener;
 import Events.LobbyListener;
 import Events.TraitorTest;
-import Events.WeaponHeads;
+import Events.WeatherListener;
 import Events.WinListener;
 
 
@@ -53,7 +54,8 @@ public class TTT extends JavaPlugin {
 		pm.registerEvents(new WinListener(), this);
 		pm.registerEvents(new DeathEvent(), this);
 		pm.registerEvents(new AutoRespawn(), this);
-		pm.registerEvents(new WeaponHeads(), this);
+		pm.registerEvents(new InteractListener(), this);
+		pm.registerEvents(new WeatherListener(), this);
 		
 		
 		this.getCommand("start").setExecutor(new Commands.StartCommand());
