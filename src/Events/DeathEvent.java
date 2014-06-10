@@ -25,77 +25,57 @@ public class DeathEvent implements Listener {
 		
 		AutoRespawn.autoRespawn(p);
 		
-		e.setDeathMessage("§8[§3TIMV§8] §7" + p.getName() + "§7 died!");
-		if (TTT.Innocent.contains(p.getName())) {
-			Bukkit.broadcastMessage("§8[§3TIMV§8] He was an §2Innocent§7!");
-		} else if (TTT.Traitor.contains(p.getName())) {
-			Bukkit.broadcastMessage("§8[§3TIMV§8] He was an §4Traitor§7!");
-		} else if (TTT.Detective.contains(p.getName())) {
-			Bukkit.broadcastMessage("§8[§3TIMV§8] He was an §1Detective§7!");
-		}
+		e.setDeathMessage("§8[§4TTT§8] §7A player died!");
 
 
 		p.teleport(new Location(Bukkit.getWorld("world"), 0.5, 58.5, 0.5));
 		
 				if (TTT.Innocent.contains(k.getName())) {
 				if (TTT.Innocent.contains(p.getName())) {
-			    k.sendMessage("§8[§3TIMV§8] §7You've killed an Innocent.");
 			    Karma.removeKarma(20, k);
-			    k.sendMessage("§8[§3TIMV§8] §c>>20");
+			    k.sendMessage("§8[§3TIMV§8] §7You killed an Innocent §c>>20");
 			   }
 			   if (TTT.Detective.contains(p.getName())) {
-			    k.sendMessage("§8[§3TIMV§8] §7You've killed a Detective.");
 			    Karma.removeKarma(50, k);
-			    k.sendMessage("§8[§3TIMV§8] §c>>50");
+			    k.sendMessage("§8[§4TTT§8] §7You killed a Detective §c>>50");
 			   }
 			   if (TTT.Traitor.contains(p.getName())) {
-			    k.sendMessage("§8[§3TIMV§8] §7You've killed an Traitor.");
 			    Karma.addKarma(20, k);
 			    //Coins.addCoins(1, k);
-			    k.sendMessage("§8[§3TIMV§8] §a>>20");
-			    k.sendMessage("§8[§3TIMV§8] §e>>1 Coin");
+			    k.sendMessage("§8[§4TTT§8] §7You killed a Traitor §a>>20");
 			   }
 			  }
 			  
 			  if (TTT.Traitor.contains(k.getName())) {
 			   if (TTT.Detective.contains(p.getName())) {
-			    k.sendMessage("§8[§3TIMV§8] §7You've killed a Detective.");
 			    Karma.addKarma(50, k);
 			    //Coins.addCoins(1, k);
-			    k.sendMessage("§8[§3TIMV§8] §a>>50");
-			    k.sendMessage("§8[§3TIMV§8] §e>>1 Coin");
+			    k.sendMessage("§8[§4TTT§8] §7You killed a Detective §a>>50");
 			   }
 			   if (TTT.Innocent.contains(p.getName())) {
-			    k.sendMessage("§8[§3TIMV§8] §7You've killed an Innocent.");
 			    Karma.addKarma(20, k);
 			    //Coins.addCoins(1, k);
-			    k.sendMessage("§8[§3TIMV§8] §a>>20");
-			    k.sendMessage("§8[§3TIMV§8] §e>>1 Coin");
+			    k.sendMessage("§8[§4TTT§8] §7You killed an Innocent §a>>20");
 			   }
 			   if (TTT.Traitor.contains(p.getName())) {
-			    k.sendMessage("§8[§3TIMV§8] §7You've killed a Traitor.");
 			    Karma.removeKarma(20, k);
-			    k.sendMessage("§8[§3TIMV§8] §c>>20");
+			    k.sendMessage("§8[§4TTT§8] §7You killed a Trator §a>>50");
 			   }
 			  }
 			  
 			  if (TTT.Detective.contains(k.getName())) {
 			   if (TTT.Detective.contains(p.getName())) {
-			    k.sendMessage("§8[§3TIMV§8] §7You've killed a Detective.");
 			    Karma.removeKarma(20, k);
-			    k.sendMessage("§8[§3TIMV§8] §c>>20");
+			    k.sendMessage("§8[§4TTT§8] §7You killed a Detective §c>>50");
 			   }
 			   if (TTT.Innocent.contains(p.getName())) {
-			    k.sendMessage("§8[§3TIMV§8] §7You've killed an Innocent.");
 			    Karma.removeKarma(20, k);
-			    k.sendMessage("§8[§3TIMV§8] §c>>20");
+			    k.sendMessage("§8[§4TTT§8] §7You killed an Innocent §c>>20");
 			   }
 			   if (TTT.Traitor.contains(p.getName())) {
-			    k.sendMessage("§8[§3TIMV§8] §7You've killed a Traitor.");
 			    Karma.addKarma(20, k);
 			    //Coins.addCoins(1, k);
-			    k.sendMessage("§8[§3TIMV§8] §a>>20");
-			    k.sendMessage("§8[§3TIMV§8] §e>>1 Coin");
+			    k.sendMessage("§8[§4TTT§8] §7You killed a Traitor §a>>20");
 			   }
 			  }
 			  
@@ -104,18 +84,21 @@ public class DeathEvent implements Listener {
 			  for(Player players : Bukkit.getOnlinePlayers()){
 					 players.hidePlayer(p);
 					 p.setAllowFlight(true);
+					 p.setMaximumNoDamageTicks(99999);
 				 }
 			  
 			  
-		//PUNKTE
 		if (TTT.Innocent.contains(p.getName())) {
 			TTT.Innocent.remove(p.getName());
+			JoinQuitListener.Spieler.remove(p);
 			WinListener.onWin();
 		} else if (TTT.Traitor.contains(p.getName())) {
 			TTT.Traitor.remove(p.getName());
+			JoinQuitListener.Spieler.remove(p);
 			WinListener.onWin();
 		} else if (TTT.Detective.remove(p.getName())) {
 			TTT.Detective.remove(p.getName());
+			JoinQuitListener.Spieler.remove(p);
 			WinListener.onWin();
 		}
 		
@@ -127,13 +110,13 @@ public class DeathEvent implements Listener {
 	}
 	
 	@EventHandler
-	public void on(FoodLevelChangeEvent e) {
+	public void onFoodChange(FoodLevelChangeEvent e) {
 		e.setCancelled(true);
 		e.setFoodLevel(40);
 	}
 	
 	  @EventHandler
-	  public void on(EntityDamageByEntityEvent e) {
+	  public void onSpectatorHit(EntityDamageByEntityEvent e) {
 		  Player p = (Player) e.getDamager();
 		  Player k = (Player) e.getEntity();
 		  

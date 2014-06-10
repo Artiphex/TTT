@@ -16,102 +16,63 @@ public class TraitorTest implements Listener {
 	
 	public int t = 0;
 	
-	public TTT plugin;
-	public TraitorTest() {
-	}
+
 	
-	final Location lamp1 = (new Location(Bukkit.getWorld("world"), -3, 68, -56));
-	final Location lamp2 = (new Location(Bukkit.getWorld("world"), 3, 68, -56));
-	final Location glass1 = (new Location(Bukkit.getWorld("world"), -1, 69, -58));
-	final Location glass2 = (new Location(Bukkit.getWorld("world"), 0, 72, -58));
-	final Location glass3 = (new Location(Bukkit.getWorld("world"), 1, 72, -58));
+	final Location lamp1 = (new Location(Bukkit.getWorld("world"), 79, 29, 825));
+	final Location lamp2 = (new Location(Bukkit.getWorld("world"), 82, 29, 825));
+	final Location glass1 = (new Location(Bukkit.getWorld("world"), 80, 27, 825));
+	final Location glass2 = (new Location(Bukkit.getWorld("world"), 81, 27, 825));;
 	
-	final Location button = (new Location(Bukkit.getWorld("world"), 0, 70, -61));
+	final Location button = (new Location(Bukkit.getWorld("world"), 80, 28, 823));
 	
 	
 	@EventHandler
 	public void onInteract(PlayerInteractEvent e) {
-		
 		Player p = e.getPlayer();
-		
-		if (TTT.Status == GameStatus.Game) {
-			if ((e.getAction() == Action.RIGHT_CLICK_BLOCK)
-
-					&& (e.getClickedBlock().getType() == Material.STONE_BUTTON)) {
-				//if (e.getClickedBlock().getLocation() == button) {
-					
-					p.teleport(new Location(Bukkit.getWorld("world"), 0.5, 69.5, -59.5));
-					p.getWorld().getChunkAt(p.getLocation()).load();
-					Bukkit.broadcastMessage("§8[§4TTT§8] §a" + p.getName() + " has entered the Tester!");
-				
-					//if (JoinQuitListener.Spieler.contains(p.getName())) {
-						glass1.getBlock().setType(Material.GLASS);
-						glass2.getBlock().setType(Material.GLASS);
-						glass3.getBlock().setType(Material.GLASS);
-
-					//}
-					
-					if (TTT.Traitor.contains(e.getPlayer())) {
-						onTestTraitor();
-					} else {
+		 if (e.getAction() == Action.RIGHT_CLICK_BLOCK){
+			if (e.getClickedBlock().getType() == Material.STONE_BUTTON) {
+				if (JoinQuitListener.Spieler.contains(p)) {
+					if (TTT.Status == GameStatus.Game) {
+						if (JoinQuitListener.Spieler.contains(p)) {
+							p.teleport(new Location(Bukkit.getWorld("world"), 80.5, 27.0, 823.5));
+							p.getWorld().getChunkAt(p.getLocation()).load();
+							Bukkit.broadcastMessage("§8[§4TTT§8] §a" + p.getName() + " has entered the Tester!");
+							glass1.getBlock().setType(Material.GLASS);
+				            glass2.getBlock().setType(Material.GLASS);
+						} else if (p.getLocation(glass1).getBlock().getType() == Material.GLASS) {
+							
+						}
 						
-						onTest();
+						if (TTT.Traitor.contains(p.getName())) {
+						    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TTT.plugin, new Runnable(){
+								public void run() {
+									Bukkit.clearRecipes();
+							        
+									glass1.getBlock().setType(Material.AIR);
+							        glass2.getBlock().setType(Material.AIR);
+							        lamp1.getBlock().setType(Material.REDSTONE_LAMP_ON);
+							        lamp2.getBlock().setType(Material.REDSTONE_LAMP_ON);
+								}
+						    	
+						    }, 100L);
+						} else {
+						    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TTT.plugin, new Runnable(){
+								public void run() {
+									Bukkit.clearRecipes();
+							        
+									glass1.getBlock().setType(Material.AIR);
+							        glass2.getBlock().setType(Material.AIR);
+								}
+						    	
+						    }, 100L);
+						}	
 					}
-				//}
+				}
 
-					} else if (glass3.getBlock().getType() == Material.GLASS) {
-						e.setCancelled(true);
-					}
-			
-		}
-
-	}
-	
-	public void onTestTraitor() {
-		
-		
-		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-			public void run(){
-				
-				Bukkit.clearRecipes();
-				
-
-					glass1.getBlock().setType(Material.AIR);
-					glass2.getBlock().setType(Material.AIR);
-					glass3.getBlock().setType(Material.AIR);
-
-					lamp1.getBlock().setType(Material.REDSTONE_LAMP_ON);
-					lamp2.getBlock().setType(Material.REDSTONE_LAMP_ON);
-				
-				
 			}
-		}, 100L);
-		
+		 }
 
 	}
 	
-	public void onTest() {
-		
-		
-		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-			public void run(){
-				
-				Bukkit.clearRecipes();
-				
-
-					glass1.getBlock().setType(Material.AIR);
-					glass2.getBlock().setType(Material.AIR);
-					glass3.getBlock().setType(Material.AIR);
-
-					lamp1.getBlock().setType(Material.REDSTONE_LAMP_ON);
-					lamp2.getBlock().setType(Material.REDSTONE_LAMP_ON);
-				
-				
-			}
-		}, 100L);
-		
-
-	}
 	
-
 }

@@ -5,10 +5,13 @@ import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
+import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -17,12 +20,15 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import Teams.PacketSend;
+import Weapon.Minigun;
+import Weapon.Sniper;
 import Events.AutoRespawn;
 import Events.BuildBreakListener;
 import Events.DeathEvent;
 import Events.InteractListener;
 import Events.JoinQuitListener;
 import Events.LobbyListener;
+import Events.LootBlocks;
 import Events.TraitorTest;
 import Events.WeatherListener;
 import Events.WinListener;
@@ -56,17 +62,28 @@ public class TTT extends JavaPlugin {
 		pm.registerEvents(new AutoRespawn(), this);
 		pm.registerEvents(new InteractListener(), this);
 		pm.registerEvents(new WeatherListener(), this);
+		pm.registerEvents(new Minigun(), this);
+		pm.registerEvents(new Sniper(), this);
+		//pm.registerEvents(new BowWeapon(), this);
 		
 		
 		this.getCommand("start").setExecutor(new Commands.StartCommand());
 		this.getCommand("update").setExecutor(new Commands.SkullTest());
 		
+		for (World world : Bukkit.getWorlds()) {
+			 for (Entity entity : world.getEntities()) {
+		            if (entity.getType() == EntityType.ARROW) {
+		                entity.remove();
+		            }
+		        }
+		}
+		
 		Timer = 91;
 		Status = GameStatus.Lobby;
 		StartCounter();
 		
-		plugin = this;
 		
+		plugin = this;
 		KarmaConfig.Karma.Save();
 	}
 	
@@ -156,6 +173,7 @@ public class TTT extends JavaPlugin {
 				} else if (Status == GameStatus.Restarting){
 					WorldPvP(false);
 					//Kisten Reset
+					LootBlocks.LootSet();
 					//for (FakeMob mob : FakeMobsPlugin.getPlugin().getMobs()) 
 					   //FakeMobsPlugin.getPlugin().removeMob(mob.getId());
 					if((Timer == 10) || (Timer == 9) || (Timer == 8) || (Timer == 7) || (Timer == 6) || (Timer == 5) || (Timer == 4) || (Timer == 3) || (Timer == 2)){
@@ -165,13 +183,6 @@ public class TTT extends JavaPlugin {
 					} else if (Timer == 0){
 						for (Player p : Bukkit.getOnlinePlayers()) {
 							p.performCommand("hub");
-							for (World w : Bukkit.getWorlds()) {
-								   for (Entity e : w.getEntities()) {
-								     if (e instanceof Item) {
-								       e.remove();
-								     }
-								   }
-								}
 							Bukkit.getServer().shutdown();
 						}
 					}
@@ -185,9 +196,11 @@ public class TTT extends JavaPlugin {
 		Bukkit.getWorld("world").setPVP(pvp);
 	}
 	
+
+	
 	public void MapTeleport() {
 		for (Player p : Bukkit.getOnlinePlayers()) {
-			final Location tp = (new Location(Bukkit.getWorld("world"), -60.5, 42.5, 0.5));
+			final Location tp = (new Location(Bukkit.getWorld("world"), 65.5, 22.5, 807.5));
 			p.teleport(tp);
 		}
 	}

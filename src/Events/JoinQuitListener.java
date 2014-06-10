@@ -12,7 +12,9 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import de.iron42.TTT.GameStatus;
+import de.iron42.TTT.KarmaConfig;
 import de.iron42.TTT.TTT;
+import de.iron42.TTT.KarmaConfig.Karma;
 
 
 
@@ -30,6 +32,14 @@ public class JoinQuitListener implements Listener {
 		p.getInventory().setChestplate(null);
 		p.setHealth(20.0);
 		Spieler.add(p);
+		
+		if(Karma.getKarma(p) == 0) {
+		Karma.setKarma(p, 200);
+		}
+		
+		if(Karma.getKarma(p) == -20) {
+		p.setBanned(true);
+		}
 		
 		e.setJoinMessage("§8[§4TTT§8] " +p.getName()+" §7joined the game. §8>§a" + Bukkit.getOnlinePlayers().length + "/24§8<" );
 	}
