@@ -7,8 +7,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 
 import de.iron42.TTT.GameStatus;
+import de.iron42.TTT.ShopConfig;
 import de.iron42.TTT.TTT;
 import Events.LootBlocks;
 
@@ -27,6 +29,10 @@ public class SkullTest implements CommandExecutor {
 			                entity.remove();
 			            }
 			        }
+			}
+			
+			for (Player p : Bukkit.getOnlinePlayers()) {
+				ShopConfig.tShop.settShop(p, 0);
 			}
 			Bukkit.broadcastMessage("§2§l|||");
 		}

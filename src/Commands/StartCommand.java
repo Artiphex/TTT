@@ -17,6 +17,7 @@ public class StartCommand implements CommandExecutor {
 				if (cs.isOp()) {
 
 					TTT.Timer = 11;
+					
 
 					Bukkit.broadcastMessage("§8[§4TTT§8] §7The game was forced started!");
 				}

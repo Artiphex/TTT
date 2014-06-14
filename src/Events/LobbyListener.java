@@ -17,9 +17,10 @@ public class LobbyListener implements Listener {
 	
 	@EventHandler
 	public void LobbyHealth(EntityDamageEvent e) {
-		if (de.iron42.TTT.TTT.Status == GameStatus.Lobby) {
+		if (de.iron42.TTT.TTT.Status == GameStatus.Lobby || de.iron42.TTT.TTT.Status == GameStatus.Peace) {
 			e.setCancelled(true);
 		}
+		WinListener.onWin();
 		
 	}
 	

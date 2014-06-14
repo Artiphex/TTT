@@ -33,13 +33,15 @@ public class Minigun implements Listener {
 						p.updateInventory();
 						p.playEffect(p.getLocation(), Effect.BOW_FIRE, 1);
 						
-						for (int i = 0; i < p.getInventory().getSize(); i++) {
-							if (p.getInventory().getItem(i) != null) {
-							if (p.getInventory().getItem(i).getType() == Material.BOW) {
-								p.getInventory().setItem(i, null);
-							}
-						}
-					}
+						//for (int i = 0; i < p.getInventory().getSize(); i++) {
+						//	if (p.getInventory().getItem(i) != null) {
+						//	if (p.getInventory().getItem(i).getType() == Material.BOW) {
+						//		p.getInventory().setItem(i, null);
+						//	}
+						//}
+					//}
+						p.getInventory().remove(minigun);
+						
 						p.updateInventory();
 						e.setCancelled(true);
 						p.getInventory().addItem(minigun);

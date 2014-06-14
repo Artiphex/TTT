@@ -31,15 +31,14 @@ public class TraitorTest implements Listener {
 		Player p = e.getPlayer();
 		 if (e.getAction() == Action.RIGHT_CLICK_BLOCK){
 			if (e.getClickedBlock().getType() == Material.STONE_BUTTON) {
-				if (JoinQuitListener.Spieler.contains(p)) {
-					if (TTT.Status == GameStatus.Game) {
+				if (JoinQuitListener.Spieler.contains(p) && glass1.getBlock().getType() == Material.AIR && TTT.Status == GameStatus.Game) {
 						if (JoinQuitListener.Spieler.contains(p)) {
 							p.teleport(new Location(Bukkit.getWorld("world"), 80.5, 27.0, 823.5));
 							p.getWorld().getChunkAt(p.getLocation()).load();
 							Bukkit.broadcastMessage("§8[§4TTT§8] §a" + p.getName() + " has entered the Tester!");
 							glass1.getBlock().setType(Material.GLASS);
 				            glass2.getBlock().setType(Material.GLASS);
-						} else if (p.getLocation(glass1).getBlock().getType() == Material.GLASS) {
+						
 							
 						}
 						
@@ -66,7 +65,7 @@ public class TraitorTest implements Listener {
 						    	
 						    }, 100L);
 						}	
-					}
+					
 				}
 
 			}

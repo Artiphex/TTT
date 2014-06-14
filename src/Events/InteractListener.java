@@ -1,5 +1,6 @@
 package Events;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -19,7 +20,7 @@ public class InteractListener implements Listener {
 	
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
-		Player p = e.getPlayer();
+		final Player p = e.getPlayer();
 		
 		ItemStack mini = new ItemStack (Material.BOW);
 		ItemMeta miniMeta = mini.getItemMeta();
@@ -112,6 +113,13 @@ public class InteractListener implements Listener {
 										} else if (p.getInventory().contains(shot)) {
 										p.getInventory().removeItem(shot);
 										p.getInventory().addItem(mini);
+									    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TTT.plugin, new Runnable(){
+											public void run() {
+												Bukkit.clearRecipes();
+												p.playSound(p.getLocation(), Sound.NOTE_SNARE_DRUM, 12, 12);
+											}
+									    	
+									    }, 10L);
 										if (p.getInventory().contains(Material.ARROW)) {
 										} else {
 											p.getInventory().addItem(new ItemStack[] { new ItemStack(Material.ARROW, 32) });

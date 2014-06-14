@@ -11,3 +11,6 @@ commands:
   update:
     description: updates skull
     usage: /update
+  stats:
+    description: stats
+    usage: /stats
