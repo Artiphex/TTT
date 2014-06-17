@@ -39,7 +39,7 @@ public class ShopConfig {
 			 }
 			 
 			 public static void addtShop(int Points, Player p) {
-				 config.set("Spieler." + p.getName() + ".Points", gettShop(p)+Points);
+				 config.set("Spieler." + p.getName() + ".Points", gettShop(p) + Points);
 			  try {
 				 config.save(file);
 			  } catch (IOException e) {

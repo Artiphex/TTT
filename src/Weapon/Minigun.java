@@ -28,7 +28,7 @@ public class Minigun implements Listener {
 					if (p.getInventory().contains(Material.ARROW) && e.getItem().getItemMeta().getDisplayName().equals("§cMinigun")) {
 						//Abfrage mit dem Namen Minigun
 						Arrow arrow = (Arrow) p.launchProjectile(Arrow.class);
-						arrow.setVelocity(arrow.getVelocity().multiply(3));
+						arrow.setVelocity(arrow.getVelocity().multiply(2));
 						p.getInventory().removeItem(new ItemStack[] { new ItemStack(Material.ARROW, 1) });
 						p.updateInventory();
 						p.playEffect(p.getLocation(), Effect.BOW_FIRE, 1);

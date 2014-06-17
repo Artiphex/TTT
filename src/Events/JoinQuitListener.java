@@ -33,6 +33,7 @@ public class JoinQuitListener implements Listener {
 		p.getInventory().setChestplate(null);
 		p.setHealth(20.0);
 		Spieler.add(p);
+		ShopConfig.tShop.settShop(p, 1);
 		
 		if(Karma.getKarma(p) == 0) {
 		Karma.setKarma(p, 200);
@@ -51,18 +52,17 @@ public class JoinQuitListener implements Listener {
 	public void onQuit(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
 		if (TTT.Status == GameStatus.Lobby || TTT.Status == GameStatus.Restarting) {
-		
 		e.setQuitMessage("§8[§4TTT§8] " +p.getName()+" §7left the game. §8>§a" + (Bukkit.getOnlinePlayers().length - 1) + "/24§8<" );
-		ShopConfig.tShop.addtShop(1, p);
+		ShopConfig.tShop.settShop(p, 1);
 	} else if (TTT.Status == GameStatus.Peace) {
-		Bukkit.broadcastMessage("");
+		e.setQuitMessage("");
 		WinListener.onWin();	
 	}
 		Spieler.remove(p);
 		if((TTT.Status == GameStatus.Game) || (TTT.Status == GameStatus.Deathmatch)) {
 		WinListener.onWin();	
 		Bukkit.broadcastMessage("§8[§4TTT§8] §7A player died");
-		Bukkit.broadcastMessage("");
+		e.setQuitMessage("");
 		}
 	}
 	

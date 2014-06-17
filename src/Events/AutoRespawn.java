@@ -1,6 +1,7 @@
 package Events;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 
 import net.minecraft.server.v1_7_R3.EntityPlayer;
 import net.minecraft.server.v1_7_R3.EnumClientCommand;
@@ -17,6 +18,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import de.iron42.TTT.TTT;
 
 public class AutoRespawn implements Listener {
+	
 
 	public static void autoRespawn(final Player player) {
 		Bukkit.getScheduler().scheduleSyncDelayedTask(TTT.plugin,
@@ -41,14 +43,15 @@ public class AutoRespawn implements Listener {
 				}, 20L);
 	}
 
-	@EventHandler
-	public void On(PlayerRespawnEvent e) {
-		Player p = e.getPlayer();
-		Location loc = p.getLocation();
-		e.setRespawnLocation(loc);
+	//@EventHandler
+	//public void On(PlayerRespawnEvent e) {
+		//Player p = e.getPlayer();
+		//Location loc = oldLocation.get(p.getName());
+		//e.setRespawnLocation(loc);
 
 		// TEST
-		p.hidePlayer(p);
-	}
+		//p.hidePlayer(p);
+	//}
+
 
 }

@@ -194,9 +194,13 @@ public class TraitorShop implements Listener {
 			if (e.getCurrentItem().getType() == Material.INK_SACK) {
 				p.sendMessage("§8[§4TTT§8] §7Coming soon");
 				if (ShopConfig.tShop.gettShop(p) >= 1) {
+					if (p.getInventory().contains(medipack)) {
+						
+					} else {
 					p.getInventory().addItem(medipack);
 					ShopConfig.tShop.removetShop(1, p);
 					p.closeInventory();
+					}
 				}
 			}
 			
@@ -316,12 +320,13 @@ public class TraitorShop implements Listener {
 		sg.setItemMeta(sgMeta);
 		
 		if (e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) {
-			if (e.getItem().equals(medipack)) {
+			if (p.getInventory().contains(Material.INK_SACK) && e.getItem().getItemMeta().getDisplayName().equals("§cMedipack")) {
 				p.setHealth(20.0);
 				p.getInventory().remove(medipack);
-				ShopConfig.tShop.removetShop(1, p);
 				p.updateInventory();
 				p.playSound(p.getLocation() ,Sound.LEVEL_UP, 1, 1);
+			} else {
+				
 			}
 		}
 	}

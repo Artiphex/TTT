@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import net.minecraft.server.v1_7_R3.PacketPlayOutNamedEntitySpawn;
 import net.minecraft.server.v1_7_R3.PacketPlayOutScoreboardTeam;
 
 import org.bukkit.Bukkit;
@@ -16,7 +17,7 @@ public class PacketSend {
 		Set players = new HashSet();
 
 
-		PacketPlayOutScoreboardTeam packet = new PacketPlayOutScoreboardTeam();
+		PacketPlayOutNamedEntitySpawn packet = new PacketPlayOutNamedEntitySpawn();
 		setPrivateValue(packet, "a", "Traitor");
 		setPrivateValue(packet, "f", 0);
 		setPrivateValue(packet, "b", "Traitor");

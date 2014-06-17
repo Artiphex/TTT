@@ -17,13 +17,17 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import de.howaner.BungeeCordLib.BungeeCord;
+import de.howaner.BungeeCordLib.server.BungeeServer;
 import Events.AutoRespawn;
 import Events.BuildBreakListener;
+import Events.ChatEvent;
 import Events.DeathEvent;
 import Events.InteractListener;
 import Events.JoinQuitListener;
 import Events.LobbyListener;
 import Events.LootBlocks;
+import Events.NewDamageEvent;
 import Events.Spectator;
 import Events.TraitorTest;
 import Events.WeatherListener;
@@ -65,7 +69,8 @@ public class TTT extends JavaPlugin {
 		pm.registerEvents(new Sniper(), this);
 		pm.registerEvents(new Spectator(), this);
 		pm.registerEvents(new TraitorShop(), this);
-		//pm.registerEvents(new BowWeapon(), this);
+		pm.registerEvents(new NewDamageEvent(), this);
+		pm.registerEvents(new ChatEvent(), this);
 		
 		
 		this.getCommand("start").setExecutor(new Commands.StartCommand());
@@ -126,17 +131,18 @@ public class TTT extends JavaPlugin {
 
 
 					} else if (Timer == 0) {
-						WorldPvP(true);
-						Bukkit.broadcastMessage("§8[§4TTT§8] §cThe grace period is over.");
-						Bukkit.broadcastMessage("§8[§4TTT§8] §aThe game starts now!");
-						
+						if (Bukkit.getOnlinePlayers().length == 4 || Bukkit.getOnlinePlayers().length >= 4) {
+							WorldPvP(true);
+							Bukkit.broadcastMessage("§8[§4TTT§8] §cThe grace period is over.");
+							Bukkit.broadcastMessage("§8[§4TTT§8] §aThe game starts now!");
+							
+							Status = GameStatus.Game;
+							Timer = 1801;
+						}
 						assignment();
 						//TEST
-						PacketSend.SendPacket();
+							//PacketSend.SendPacket();
 						//TEST
-						
-						Status = GameStatus.Game;
-						Timer = 1801;
 					}
 					
 				} else if (Status == GameStatus.Game){
@@ -150,14 +156,16 @@ public class TTT extends JavaPlugin {
 						}
 						Bukkit.broadcastMessage("§8[§4TTT§8] §1Detective§7: " + D.toString());
 						
+						
 						StringBuilder T = new StringBuilder();
 						for (int in = 0; in < Traitor.size(); in++) {
 						    if (in != 0) T.append(", ");
 						    T.append(Traitor.get(in));
 						}
+						
 						for (Player p : JoinQuitListener.Spieler) {
 							if (TTT.Traitor.contains(p.getName())) {
-								 p.sendMessage("§8[§4TTT§8] §4Trator§7: " + T.toString());
+								 p.sendMessage("§8[§4TTT§8] §4Traitor§7: " + T.toString());
 							}
 						}
 						//
@@ -194,8 +202,18 @@ public class TTT extends JavaPlugin {
 						Bukkit.broadcastMessage("§8[§4TTT§8] §7The server restarts in §c" + Timer + " §7second.");
 					} else if (Timer == 0){
 						for (Player p : Bukkit.getOnlinePlayers()) {
-							p.performCommand("hub");
-							Bukkit.getServer().shutdown();
+							
+							//BungeeServer server = BungeeCord.getManager().addServer("hub");
+							//server.teleport(p);
+						    
+							Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TTT.plugin, new Runnable(){
+								public void run() {
+									Bukkit.clearRecipes();
+									Bukkit.getServer().shutdown();
+								}
+						    	
+						    }, 40L);
+							
 						}
 					}
 
@@ -219,13 +237,13 @@ public class TTT extends JavaPlugin {
 	
 	
 	public void assignment() {
-		if (JoinQuitListener.Spieler.size() >= 3) {
+		if (Bukkit.getOnlinePlayers().length == 4 || Bukkit.getOnlinePlayers().length >= 4) {
 			  ArrayList<String> playerAssignmentList = new ArrayList<String>();
 			  for (Player player : JoinQuitListener.Spieler) {
 			   playerAssignmentList.add(player.getName());
 			  }
-
-			  int numberOfTraitors = playerAssignmentList.size() / 4;
+			  //3 statt 4
+			  int numberOfTraitors = playerAssignmentList.size() / 3;
 			  int numberOfDetective = playerAssignmentList.size() / 8;
 
 			  if (numberOfDetective < 1) {
@@ -285,7 +303,10 @@ public class TTT extends JavaPlugin {
 			   }
 			  }
 
-			 } else {
+			 } else if (Bukkit.getOnlinePlayers().length == 3 || Bukkit.getOnlinePlayers().length <= 3) {
+				 Status = GameStatus.Lobby;
+				 Timer = 91;
+				 LootBlocks.LootSet();
 				 for (Player p : JoinQuitListener.Spieler) {
 						p.teleport(JoinQuitListener.lobby);
 						p.getInventory().clear();

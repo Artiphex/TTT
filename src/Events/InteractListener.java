@@ -178,7 +178,7 @@ public class InteractListener implements Listener {
 									
 									
 									
-								} else if(owner.equals("Nottrex")) {
+								} else if (owner.equals("Nottrex")) {
 									
 									if(p.getInventory().contains(Material.WOOD_SWORD)) {
 										p.getInventory().remove(Material.WOOD_SWORD);
@@ -188,6 +188,7 @@ public class InteractListener implements Listener {
 										skullState.update();
 										p.playSound(p.getLocation(), Sound.ITEM_PICKUP, 1, 1);
 									} else if (p.getInventory().contains(Material.STONE_SWORD)) {
+										p.updateInventory();
 										e.setCancelled(true);
 											} else {
 										block.setType(Material.AIR);
