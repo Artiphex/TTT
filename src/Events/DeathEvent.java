@@ -10,6 +10,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 import de.iron42.TTT.KarmaConfig.Karma;
+import de.iron42.TTT.ShopConfig.tShop;
 import de.iron42.TTT.ShopConfig;
 import de.iron42.TTT.TTT;
 
@@ -44,14 +45,14 @@ public class DeathEvent implements Listener {
 			if (TTT.Traitor.contains(k.getName())) {
 				if (TTT.Detective.contains(p.getName())) {
 					Karma.addKarma(50, k);
-					ShopConfig.tShop.addtShop(2, p);
+					tShop.addtShop(2, p);
 					k.sendMessage("§8[§4TTT§8] §7Shoppoint §a>>2");
 					// Coins.addCoins(1, k);
 					k.sendMessage("§8[§4TTT§8] §7You killed a Detective §a>>50");
 				}
 				if (TTT.Innocent.contains(p.getName())) {
 					Karma.addKarma(20, k);
-					ShopConfig.tShop.addtShop(1, p);
+					tShop.addtShop(1, p);
 					k.sendMessage("§8[§4TTT§8] §7Shoppoint §a>>1");
 					// Coins.addCoins(1, k);
 					k.sendMessage("§8[§4TTT§8] §7You killed an Innocent §a>>20");

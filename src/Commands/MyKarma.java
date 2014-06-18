@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 import de.iron42.TTT.KarmaConfig;
 import de.iron42.TTT.KarmaConfig.Karma;
+import de.iron42.TTT.ShopConfig.tShop;
 import de.iron42.TTT.TTT;
 
 public class MyKarma implements CommandExecutor {

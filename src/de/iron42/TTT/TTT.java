@@ -17,6 +17,9 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
+
 import de.howaner.BungeeCordLib.BungeeCord;
 import de.howaner.BungeeCordLib.server.BungeeServer;
 import Events.AutoRespawn;
@@ -32,6 +35,7 @@ import Events.Spectator;
 import Events.TraitorTest;
 import Events.WeatherListener;
 import Events.WinListener;
+import Teams.LeatherTeam;
 import Teams.PacketSend;
 import Weapon.Minigun;
 import Weapon.Sniper;
@@ -41,6 +45,12 @@ public class TTT extends JavaPlugin {
 	public static int Timer = 0;
 	public static GameStatus Status;
 	public static TTT plugin;
+	
+	public static ProtocolManager manager;
+	
+	public void onLoad() {
+        manager = ProtocolLibrary.getProtocolManager();
+	}
 	
 	public static ArrayList<String> Innocent = new ArrayList<String>();
 	public static ArrayList<String> Detective = new ArrayList<String>();
@@ -71,6 +81,7 @@ public class TTT extends JavaPlugin {
 		pm.registerEvents(new TraitorShop(), this);
 		pm.registerEvents(new NewDamageEvent(), this);
 		pm.registerEvents(new ChatEvent(), this);
+		pm.registerEvents(new LeatherTeam(), this);
 		
 		
 		this.getCommand("start").setExecutor(new Commands.StartCommand());
@@ -97,6 +108,7 @@ public class TTT extends JavaPlugin {
 		ShopConfig.tShop.Save();
 		
 	}
+	
 	
 	public void StartCounter() {
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
@@ -167,6 +179,7 @@ public class TTT extends JavaPlugin {
 							if (TTT.Traitor.contains(p.getName())) {
 								 p.sendMessage("§8[§4TTT§8] §4Traitor§7: " + T.toString());
 							}
+							
 						}
 						//
 						//for (Player p : ((Player) TIMV.Traitor).getName()) {
@@ -302,7 +315,15 @@ public class TTT extends JavaPlugin {
 			    p.getInventory().setChestplate(de);
 			   }
 			  }
-
+			  
+			  	//TEST
+				for (Player p : JoinQuitListener.Spieler) {
+					if (TTT.Traitor.contains(p.getName())) {
+						 LeatherTeam.onTraitorLeather();
+					}
+					
+				}
+				//TEst
 			 } else if (Bukkit.getOnlinePlayers().length == 3 || Bukkit.getOnlinePlayers().length <= 3) {
 				 Status = GameStatus.Lobby;
 				 Timer = 91;
