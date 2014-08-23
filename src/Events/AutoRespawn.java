@@ -15,7 +15,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
-import de.iron42.TTT.TTT;
+import TTT.TTT;
 
 public class AutoRespawn implements Listener {
 	

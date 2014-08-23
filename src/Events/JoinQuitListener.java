@@ -11,11 +11,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import de.iron42.TTT.GameStatus;
-import de.iron42.TTT.KarmaConfig;
-import de.iron42.TTT.ShopConfig;
-import de.iron42.TTT.TTT;
-import de.iron42.TTT.KarmaConfig.Karma;
+import TTT.GameStatus;
+import TTT.ShopConfig;
+import TTT.KarmaConfig.Karma;
+import TTT.TTT;
+
 
 
 
@@ -33,7 +33,7 @@ public class JoinQuitListener implements Listener {
 		p.getInventory().setChestplate(null);
 		p.setHealth(20.0);
 		Spieler.add(p);
-		ShopConfig.tShop.settShop(p, 1);
+		ShopConfig.tShop.settShop(p, 2);
 		
 		if(Karma.getKarma(p) == 0) {
 		Karma.setKarma(p, 200);
@@ -43,32 +43,33 @@ public class JoinQuitListener implements Listener {
 		p.setBanned(true);
 		}
 		
-		if (TTT.Status == GameStatus.Lobby) {
-		e.setJoinMessage("§8[§4TTT§8] " +p.getName()+" §7joined the game. §8>§a" + Bukkit.getOnlinePlayers().length + "/24§8<" );
+		if (TTT.Status == GameStatus.preLobby || TTT.Status == GameStatus.Lobby) {
+		e.setJoinMessage("§a" +p.getName()+" §7ist dem Spiel beigetreten");
+		if (Bukkit.getOnlinePlayers().length == 4 || Bukkit.getOnlinePlayers().length >= 4) {
+			TTT.Status = GameStatus.Lobby;
+		}
 		}
 	}
 	
 	@EventHandler
 	public void onQuit(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
-		if (TTT.Status == GameStatus.Lobby || TTT.Status == GameStatus.Restarting) {
-		e.setQuitMessage("§8[§4TTT§8] " +p.getName()+" §7left the game. §8>§a" + (Bukkit.getOnlinePlayers().length - 1) + "/24§8<" );
-		ShopConfig.tShop.settShop(p, 1);
+		if (TTT.Status == GameStatus.Lobby || TTT.Status == GameStatus.preLobby || TTT.Status == GameStatus.Restarting) {
+		e.setQuitMessage("§a" +p.getName()+" §7hat das Spiel verlassen");
 	} else if (TTT.Status == GameStatus.Peace) {
 		e.setQuitMessage("");
-		WinListener.onWin();	
+		WinListener.Win();	
 	}
 		Spieler.remove(p);
 		if((TTT.Status == GameStatus.Game) || (TTT.Status == GameStatus.Deathmatch)) {
-		WinListener.onWin();	
-		Bukkit.broadcastMessage("§8[§4TTT§8] §7A player died");
+		WinListener.Win();	
 		e.setQuitMessage("");
 		}
 	}
 	
 	@EventHandler
 	public void inGame(PlayerLoginEvent e) {
-		if ((de.iron42.TTT.TTT.Status == GameStatus.Peace) || (de.iron42.TTT.TTT.Status == GameStatus.Game) || (de.iron42.TTT.TTT.Status == GameStatus.Restarting) ) {
+		if ((TTT.Status == GameStatus.Peace) || (TTT.Status == GameStatus.Game) || (TTT.Status == GameStatus.Restarting) ) {
 			e.disallow(null, null);
 		}
 		

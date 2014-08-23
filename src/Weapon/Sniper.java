@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import de.iron42.TTT.BowWeapon;
+import TTT.BowWeapon;
 
 public class Sniper implements Listener {
 	

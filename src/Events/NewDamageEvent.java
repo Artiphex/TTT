@@ -14,7 +14,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import de.iron42.TTT.TTT;
+import TTT.TTT;
 
 public class NewDamageEvent implements Listener {
 
@@ -42,7 +42,7 @@ public class NewDamageEvent implements Listener {
 					players.hidePlayer(p);
 					p.setAllowFlight(true);
 					JoinQuitListener.Spieler.remove(p);
-					WinListener.onWin();
+					WinListener.Win();
 				}
 			}
 		}

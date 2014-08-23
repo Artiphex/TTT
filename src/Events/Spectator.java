@@ -5,7 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
-import de.iron42.TTT.TTT;
+import TTT.TTT;
 
 public class Spectator implements Listener {
 	

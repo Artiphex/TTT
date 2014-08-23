@@ -6,7 +6,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 
-import de.iron42.TTT.GameStatus;
+import TTT.GameStatus;
 
 public class LobbyListener implements Listener {
 	
@@ -17,10 +17,10 @@ public class LobbyListener implements Listener {
 	
 	@EventHandler
 	public void LobbyHealth(EntityDamageEvent e) {
-		if (de.iron42.TTT.TTT.Status == GameStatus.Lobby || de.iron42.TTT.TTT.Status == GameStatus.Peace) {
+		if (TTT.TTT.Status == GameStatus.preLobby || TTT.TTT.Status == GameStatus.Lobby || TTT.TTT.Status == GameStatus.Peace) {
 			e.setCancelled(true);
 		}
-		WinListener.onWin();
+		WinListener.Win();
 		
 	}
 	

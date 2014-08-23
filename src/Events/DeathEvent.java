@@ -9,10 +9,10 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-import de.iron42.TTT.KarmaConfig.Karma;
-import de.iron42.TTT.ShopConfig.tShop;
-import de.iron42.TTT.ShopConfig;
-import de.iron42.TTT.TTT;
+import TTT.ShopConfig;
+import TTT.TTT;
+import TTT.KarmaConfig.Karma;
+import TTT.ShopConfig.tShop;
 
 public class DeathEvent implements Listener {
 
@@ -29,54 +29,61 @@ public class DeathEvent implements Listener {
 			if (TTT.Innocent.contains(k.getName())) {
 				if (TTT.Innocent.contains(p.getName())) {
 					Karma.removeKarma(20, k);
-					k.sendMessage("§8[§4TTT§8] §7You killed an Innocent §c>>20");
+					k.sendMessage("§8[§4TTT§8] §7Du hast " + p.getName() + " getötet.");
+					k.sendMessage("§8[§4TTT§8] §7Du hast einen Innocent getötet §c-20");
 				}
 				if (TTT.Detective.contains(p.getName())) {
 					Karma.removeKarma(50, k);
-					k.sendMessage("§8[§4TTT§8] §7You killed a Detective §c>>50");
+					k.sendMessage("§8[§4TTT§8] §7Du hast " + p.getName() + " getötet.");
+					k.sendMessage("§8[§4TTT§8] §7Du hast einen Detektive getötet §c-50");
 				}
 				if (TTT.Traitor.contains(p.getName())) {
 					Karma.addKarma(20, k);
 					// Coins.addCoins(1, k);
-					k.sendMessage("§8[§4TTT§8] §7You killed a Traitor §a>>20");
+					k.sendMessage("§8[§4TTT§8] §7Du hast " + p.getName() + " getötet.");
+					k.sendMessage("§8[§4TTT§8] §7Du hast einen Traitor getötet §a+20");
 				}
 			}
 
 			if (TTT.Traitor.contains(k.getName())) {
 				if (TTT.Detective.contains(p.getName())) {
-					Karma.addKarma(50, k);
-					tShop.addtShop(2, p);
-					k.sendMessage("§8[§4TTT§8] §7Shoppoint §a>>2");
-					// Coins.addCoins(1, k);
-					k.sendMessage("§8[§4TTT§8] §7You killed a Detective §a>>50");
+					Karma.addKarma(30, k);
+					ShopConfig.tShop.addtShop(2, k);
+					k.sendMessage("§8[§4TTT§8] §7Traitor-Punkte §a+2");
+					k.sendMessage("§8[§4TTT§8] §7Du hast einen Detektive getötet §a+50");
 				}
 				if (TTT.Innocent.contains(p.getName())) {
-					Karma.addKarma(20, k);
-					tShop.addtShop(1, p);
-					k.sendMessage("§8[§4TTT§8] §7Shoppoint §a>>1");
+					Karma.addKarma(10, k);
+					ShopConfig.tShop.addtShop(1, k);
+					k.sendMessage("§8[§4TTT§8] §7Traitor-Punkte §a+1");
 					// Coins.addCoins(1, k);
-					k.sendMessage("§8[§4TTT§8] §7You killed an Innocent §a>>20");
+					k.sendMessage("§8[§4TTT§8] §7Du hast " + p.getName() + " getötet.");
+					k.sendMessage("§8[§4TTT§8] §7Du hast einen Innocent getötet §a+20");
 				}
 				if (TTT.Traitor.contains(p.getName())) {
 					Karma.removeKarma(50, k);
-					k.sendMessage("§8[§4TTT§8] §7You killed a Traitor §c>>50");
+					k.sendMessage("§8[§4TTT§8] §7Du hast " + p.getName() + " getötet.");
+					k.sendMessage("§8[§4TTT§8] §7Du hast einen Traitor getötet §c-50");
 				}
 			}
 
 			if (TTT.Detective.contains(k.getName())) {
 				if (TTT.Detective.contains(p.getName())) {
-					Karma.removeKarma(20, k);
-					k.sendMessage("§8[§4TTT§8] §7You killed a Detective §c>>50");
+					Karma.removeKarma(50, k);
+					k.sendMessage("§8[§4TTT§8] §7Du hast " + p.getName() + " getötet.");
+					k.sendMessage("§8[§4TTT§8] §7Du hast einen Detective getötet §c-50");
 				}
 				if (TTT.Innocent.contains(p.getName())) {
 					Karma.removeKarma(20, k);
-					k.sendMessage("§8[§4TTT§8] §7You killed an Innocent §c>>20");
+					k.sendMessage("§8[§4TTT§8] §7Du hast " + p.getName() + " getötet.");
+					k.sendMessage("§8[§4TTT§8] §7Du hast einen Innocent getötet §c-20");
 				}
 				if (TTT.Traitor.contains(p.getName())) {
-					Karma.addKarma(20, k);
-					ShopConfig.tShop.addtShop(2, p);
-					// Coins.addCoins(1, k);
-					k.sendMessage("§8[§4TTT§8] §7You killed a Traitor §a>>20");
+					Karma.addKarma(30, k);
+					ShopConfig.tShop.addtShop(2, k);
+					k.sendMessage("§8[§4TTT§8] §7Du hast " + p.getName() + " getötet.");
+					k.sendMessage("§8[§4TTT§8] §7Du hast einen Traitor getötet §a+30");
+					k.sendMessage("§8[§4TTT§8] §7Detective-Punkte §a+4");
 				}
 			}
 		}
@@ -90,15 +97,15 @@ public class DeathEvent implements Listener {
 		if (TTT.Innocent.contains(p.getName())) {
 			TTT.Innocent.remove(p.getName());
 			JoinQuitListener.Spieler.remove(p);
-			WinListener.onWin();
+			WinListener.Win();
 		} else if (TTT.Traitor.contains(p.getName())) {
 			TTT.Traitor.remove(p.getName());
 			JoinQuitListener.Spieler.remove(p);
-			WinListener.onWin();
+			WinListener.Win();
 		} else if (TTT.Detective.remove(p.getName())) {
 			TTT.Detective.remove(p.getName());
 			JoinQuitListener.Spieler.remove(p);
-			WinListener.onWin();
+			WinListener.Win();
 		}
 		
 		p.setHealth(20.0D);
@@ -106,12 +113,7 @@ public class DeathEvent implements Listener {
 		p.hidePlayer(p);
 		Teams.Bedanimation.launchBedAnimation(p);
 
-		e.setDeathMessage("§8[§4TTT§8] §7A player died!");
-
-
-
-
-
+		e.setDeathMessage("");
 
 		if (Karma.getKarma(p) == -20) {
 			p.setBanned(true);

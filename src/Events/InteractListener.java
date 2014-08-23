@@ -13,8 +13,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import de.iron42.TTT.GameStatus;
-import de.iron42.TTT.TTT;
+import TTT.GameStatus;
+import TTT.TTT;
+import Teams.Traitor;
 
 public class InteractListener implements Listener {
 	
@@ -53,7 +54,7 @@ public class InteractListener implements Listener {
 								if(owner.equals("IntelliJ")) {
 									
 									
-									p.sendMessage("§[§4TTT§8] §aShotgun - Coming soon");
+									p.sendMessage("§7[§4TTT§8] §7Shotgun - Coming soon");
 									
 								} else if(owner.equals("Abmahnung")) {
 									
@@ -212,5 +213,10 @@ public class InteractListener implements Listener {
 	//        Bukkit.broadcastMessage(owner);
 	//       }
 	//		}
+		
+		if (TTT.Spectator.contains(p.getName())) {
+			e.setCancelled(true);
+		}
+		
 	}
 }

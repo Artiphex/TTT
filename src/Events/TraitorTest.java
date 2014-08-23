@@ -9,8 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import de.iron42.TTT.GameStatus;
-import de.iron42.TTT.TTT;
+import TTT.GameStatus;
+import TTT.TTT;
 
 public class TraitorTest implements Listener {
 	
@@ -31,11 +31,11 @@ public class TraitorTest implements Listener {
 		Player p = e.getPlayer();
 		 if (e.getAction() == Action.RIGHT_CLICK_BLOCK){
 			if (e.getClickedBlock().getType() == Material.STONE_BUTTON) {
-				if (JoinQuitListener.Spieler.contains(p) && glass1.getBlock().getType() == Material.AIR && TTT.Status == GameStatus.Game) {
+				if (JoinQuitListener.Spieler.contains(p) && glass1.getBlock().getType() == Material.AIR && lamp1.getBlock().getType() == Material.REDSTONE_LAMP_OFF &&  TTT.Status == GameStatus.Game) {
 						if (JoinQuitListener.Spieler.contains(p)) {
 							p.teleport(new Location(Bukkit.getWorld("world"), 80.5, 27.0, 823.5));
 							p.getWorld().getChunkAt(p.getLocation()).load();
-							Bukkit.broadcastMessage("§8[§4TTT§8] §a" + p.getName() + " has entered the Tester!");
+							Bukkit.broadcastMessage("§8[§4TTT§8] §a" + p.getName() + " hat den Tester betreten!");
 							glass1.getBlock().setType(Material.GLASS);
 				            glass2.getBlock().setType(Material.GLASS);
 						
@@ -49,11 +49,20 @@ public class TraitorTest implements Listener {
 							        
 									glass1.getBlock().setType(Material.AIR);
 							        glass2.getBlock().setType(Material.AIR);
-							        lamp1.getBlock().setType(Material.REDSTONE_LAMP_ON);
-							        lamp2.getBlock().setType(Material.REDSTONE_LAMP_ON);
+							        lamp1.getBlock().setType(Material.GLOWSTONE);
+							        lamp2.getBlock().setType(Material.GLOWSTONE);
 								}
 						    	
-						    }, 100L);
+						    }, 80L);
+						    
+						    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TTT.plugin, new Runnable(){
+								public void run() {
+									Bukkit.clearRecipes();
+							        lamp1.getBlock().setType(Material.REDSTONE_LAMP_OFF);
+							        lamp2.getBlock().setType(Material.REDSTONE_LAMP_OFF);
+								}
+						    	
+						    }, 160L);
 						} else {
 						    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TTT.plugin, new Runnable(){
 								public void run() {

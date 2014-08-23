@@ -10,10 +10,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import de.iron42.TTT.KarmaConfig;
-import de.iron42.TTT.KarmaConfig.Karma;
-import de.iron42.TTT.ShopConfig.tShop;
-import de.iron42.TTT.TTT;
+import TTT.KarmaConfig;
+import TTT.TTT;
+import TTT.KarmaConfig.Karma;
+import TTT.ShopConfig.tShop;
 
 public class MyKarma implements CommandExecutor {
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
@@ -21,10 +21,10 @@ public class MyKarma implements CommandExecutor {
 		
 	    if (label.equalsIgnoreCase("Stats")) {
 	        if (args.length == 0) {
-	            cs.sendMessage("§8[§4TTT§8] §7You have §a" + this.getKarma(player, player.getName()) + " §7Karma." );
+	            cs.sendMessage("§8[§4TTT§8] §7Du hast §a" + this.getKarma(player, player.getName()) + " §7Karma." );
 	            return true;
 	        } else if (args.length == 1) {
-	        	cs.sendMessage("§8[§4TTT§8]§7 " + args[0] + " §7has§a " + this.getKarma(player, args[0]) + " §7Karma.");
+	        	cs.sendMessage("§8[§4TTT§8]§7 " + args[0] + " §7hat§a " + this.getKarma(player, args[0]) + " §7Karma.");
 	            return true;
 	        } else {
 	        	 this.getKarma(player, player.getName());
